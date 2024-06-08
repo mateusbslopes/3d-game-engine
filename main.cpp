@@ -110,6 +110,7 @@ private:
         
         if(enableValidationLayers) {
             createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+            createInfo.ppEnabledLayerNames = validationLayers.data();
         } else {
             createInfo.enabledLayerCount = 0;
         }
@@ -129,11 +130,10 @@ private:
         createInfo.ppEnabledExtensionNames = requiredExtensions.data();
         // end Apple compatibility
         
-        printAvailableExtensions();
+        //printAvailableExtensions();
         
         VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
         
-        std::cout << "vkResult: " << result << std::endl;
         if(result != VK_SUCCESS){
             throw std::runtime_error("Failed to create instance!");
         }
